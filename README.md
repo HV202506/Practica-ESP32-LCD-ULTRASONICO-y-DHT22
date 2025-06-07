@@ -1,6 +1,6 @@
-# Practica-ESP32-LCD-ULTRASONICO-y-DH22
+# Practica-ESP32-LCD-ULTRASONICO-y-DHT22
 
-En este repositorio se mostrara como programar un ESP32 con un sensor ULTRASONICO y un DH22, con el cual obtendremos las la magnitud de la distancia y algunos datos adicionales se mostraran en una pantalla LCD.
+En este repositorio se mostrara como programar un ESP32 con un sensor ULTRASONICO y un DHT22, con el cual obtendremos las la magnitud de la distancia, temperatura y humedad del entorno, asi como algunos datos adicionales se mostraran en una pantalla LCD.
 
 ## Introducción 
 
@@ -11,6 +11,8 @@ La pantalla LCD se empleara para mostrar los datos solicitados:
 - Nombre
 - Carrera profesional
 - Fecha
+- Temperatura
+- Humedad
 - Distancia (determinada por el sensor ultrasonico)
 
 Esta practica se realizo empleando un simulador: [WOKWI](www.wokwi.com) la cual nos permite simular los elementos y el codigo.
@@ -20,6 +22,7 @@ Esta practica se realizo empleando un simulador: [WOKWI](www.wokwi.com) la cual 
 Para realizar esta practica se necesito
 - [WOKWI](www.wokwi.com)
 - Una tarjeta ESP32 (para adquisicion de datos)
+- -DHT22 
 - Sensor ultrasonico "HC-SR04 Ultrasonic Distance Sensor"
 - LCD 16x2 (I2C)
 
@@ -35,7 +38,7 @@ Codigo empleado:
 #define LCD_COLUMNS 20
 #define LCD_LINES   4
 
-const int DHT_PIN = 15;
+const int DHT_PIN =18 ;
 
 DHTesp dhtSensor;
 
@@ -45,16 +48,22 @@ const int Trigger = 4;   //Pin digital 2 para el Trigger del sensor
 const int Echo = 15;   //Pin digital 3 para el Echo del sensor
 
 void setup() {
-  Serial.begin(9600);//iniciailzamos la comunicación
+  Serial.begin(115200);//iniciailzamos la comunicación
   pinMode(Trigger, OUTPUT); //pin como salida
   pinMode(Echo, INPUT);  //pin como entrada
   digitalWrite(Trigger, LOW);//Inicializamos el pin con 0
+  dhtSensor.setup(DHT_PIN, DHTesp::DHT22);
   lcd.init();
   lcd.backlight();
 }
 
 void loop()
 {
+
+  TempAndHumidity  data = dhtSensor.getTempAndHumidity();
+  Serial.println("Temp: " + String(data.temperature, 1) + "°C");
+  Serial.println("Humidity: " + String(data.humidity, 1) + "%");
+  Serial.println("---");
 
   long t; //timepo que demora en llegar el eco
   long d; //distancia en centimetros
@@ -99,8 +108,16 @@ void loop()
   lcd.print(" ");
   delay(2000);
   lcd.clear();
+  
+  //Mostrar temperatura (fila 1); mostrar humedad (fila 2)
+  lcd.setCursor(0, 0);
+  lcd.print("  Temp: " + String(data.temperature, 1) + "\xDF"+"C  ");
+  lcd.setCursor(0, 1);
+  lcd.print("Humidity: " + String(data.humidity, 1) + "% ");
+  delay(2000);
+  lcd.clear();
 
-  //Mostrar la distancia en "cm"
+ //Mostrar la distancia en "cm"
   lcd.setCursor(0, 0);
   lcd.print("Distancia: " + String(d) + "cm");
   lcd.setCursor(0, 1);
@@ -113,11 +130,11 @@ void loop()
 
 2. Instalar la libreria de DHT sensor library for ESPx y en la siguiente imagen se muestran las librerias empleadas.
 
-![](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/librerias.png?raw=true)
+![](LIBRERIAS)
 
-3. Hacer las concexiones del sensor ultrasonico HC-SR04 y la pantalla LCD con el ESP32  tal cual se muestra la siguiente imagen.
+3. Hacer las concexiones del sensor ultrasonico HC-SR04, el DHT22 y la pantalla LCD con el ESP32  tal cual se muestra la siguiente imagen.
 
-![](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/conexiones.png?raw=true)
+![](CONEXIONES)
 
 ## Librerias empleadas
 1. DHT sensor library for ESPx
@@ -127,9 +144,10 @@ void loop()
 
 1. Iniciar la simulación.
 2. Observar los datos del monitor serial.
-3. Colorar la distancia simulada haciendo doble click en el Sensor ultrasonico HC-SR04
+3. Colorar la temperatura y humedad dando doble click en el sensor DHT11 (temperatura y humedad).
+4. Colorar la distancia simulada haciendo doble click en el Sensor ultrasonico HC-SR04
 
-4. Observar los datos mostrados en la pantalla LCD
+5. Observar los datos mostrados en la pantalla LCD
 
 # Resultados
 
@@ -137,19 +155,22 @@ Una vez realizados los pasos anteriores deberas visualizar los elementos solicit
 
 ## Pantalla 1:
 
-![](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/diplomado.png?raw=true)
+![](DIPLOMADO)
 
 ## Pantalla 2:
 
-![](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/nombre%20%20y%20carrera.png?raw=true)
+![](NOMBRE)
 
 ## Pantalla 3:
 
-![image](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/fecha.png?raw=true)
-
+![FECHA
 ## Pantalla 4:
 
-![image](https://github.com/HV202506/Practica-ESP32-LCD-y-ULTRASONICO/blob/main/distancia.png?raw=true)
+![image](TEMPERATURA
+
+## Pantalla 5:
+
+![image](DISTANCIA
 
 
 # Créditos

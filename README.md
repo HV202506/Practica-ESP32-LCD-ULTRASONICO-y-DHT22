@@ -22,7 +22,7 @@ Esta practica se realizo empleando un simulador: [WOKWI](www.wokwi.com) la cual 
 Para realizar esta practica se necesito
 - [WOKWI](www.wokwi.com)
 - Una tarjeta ESP32 (para adquisicion de datos)
-- -DHT22 
+- DHT22 
 - Sensor ultrasonico "HC-SR04 Ultrasonic Distance Sensor"
 - LCD 16x2 (I2C)
 
@@ -130,11 +130,11 @@ void loop()
 
 2. Instalar la libreria de DHT sensor library for ESPx y en la siguiente imagen se muestran las librerias empleadas.
 
-![](LIBRERIAS)
+![](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/librerias.png?raw=true)
 
 3. Hacer las concexiones del sensor ultrasonico HC-SR04, el DHT22 y la pantalla LCD con el ESP32  tal cual se muestra la siguiente imagen.
 
-![](CONEXIONES)
+![](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/conexiones.png?raw=true)
 
 ## Librerias empleadas
 1. DHT sensor library for ESPx
@@ -155,22 +155,22 @@ Una vez realizados los pasos anteriores deberas visualizar los elementos solicit
 
 ## Pantalla 1:
 
-![](DIPLOMADO)
+![](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/diplomado.png?raw=true)
 
 ## Pantalla 2:
 
-![](NOMBRE)
+![](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/nombre.png?raw=true)
 
 ## Pantalla 3:
 
-![FECHA
+![](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/fecha.png?raw=true)
 ## Pantalla 4:
 
-![image](TEMPERATURA
+![image](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/temperatura.png?raw=true)
 
 ## Pantalla 5:
 
-![image](DISTANCIA
+![image](https://github.com/HV202506/Practica-ESP32-LCD-ULTRASONICO-y-DHT22/blob/main/distancia.png?raw=true)
 
 
 # Créditos
